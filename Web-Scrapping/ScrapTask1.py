@@ -12,7 +12,7 @@ class TallestBuildingsScraper:
         self.url = url
         self.driver = None
 
-    def setup_driver(self, headless=False):
+    def setup_driver(self, headless=True):
         chrome_options = Options()
         if headless:
             chrome_options.add_argument("--headless=new")
@@ -22,31 +22,44 @@ class TallestBuildingsScraper:
 
     def scrape_table(self, table_xpath):
         self.driver.get(self.url)
-        time.sleep(3)  # Wait for page to load
+        time.sleep(3)  
 
         table = self.driver.find_element(By.XPATH, table_xpath)
-        rows = table.find_elements(By.TAG_NAME, "tr")[2:]  # Skip header row
+        rows = table.find_elements(By.TAG_NAME, "tr")[2:]  
 
         data = []
         for row in rows:
             cells = row.find_elements(By.TAG_NAME, "td")
             if len(cells) >= 5:
-                # Regex to extract Name, City, Year
+                # Regex 
+                number_match = re.search(r"^(.*?)\n", cells[0].text)
                 name_match = re.search(r"^(.*?)\n", cells[1].text)
-                city_match = re.search(r"\n(.*?)\n", cells[6].text)
+                height_match = re.search(r"\n(.*?)\n", cells[3].text)
+                floors_match = re.search(r"\n(.*?)\n", cells[4].text)
+                city_match = re.search(r"^(.*?)\n", cells[6].text)
+                country_match = re.search(r"\n(.*?)\n", cells[-4].text)
+                year_match = re.search(r"\n(.*?)\n", cells[-3].text)
+                comments_match = re.search(r"^(.*?)\n", cells[-2].text)
                 
                 
+                number = number_match.group(1).strip() if name_match else cells[0].text.strip()
                 name = name_match.group(1).strip() if name_match else cells[1].text.strip()
+                height = height_match.group(1).strip() if height_match else cells[3].text.strip()
+                floors = floors_match.group(1).strip() if height_match else cells[4].text.strip()
                 city = city_match.group(1).strip() if city_match else cells[6].text.strip()
+                country = country_match.group(1).strip() if height_match else cells[-4].text.strip()
+                year = year_match.group(1).strip() if height_match else cells[-3].text.strip()
+                comments = comments_match.group(1).strip() if height_match else cells[-2].text.strip()
+
                 
                 
-                data.append((name, city))
+                data.append((number, name,  height, floors, city, country,year, comments ))
         
         return data
 
     def save_to_csv(self, data, output_file=None):
-        df = pd.DataFrame(data, columns=["Name", "City"])
-        df.to_csv("ScrapTask1_output.csv", index=False)  # Always save as ScrapTask1_output.csv
+        df = pd.DataFrame(data, columns=["Number", "Name",  "height", "Floors", "City","Country", "Year", "Comments"])
+        df.to_csv("ScrapTask1_output.csv", index=False)  
         print(f"Data saved to ScrapTask1_output.csv")
 
     def close_driver(self):
