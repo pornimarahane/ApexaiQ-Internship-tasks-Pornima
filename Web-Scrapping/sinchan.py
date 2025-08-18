@@ -66,10 +66,12 @@ class TroemnerScraper:
 
             # productName
             product_name = self._extract_with_regex(
-                r"Weight\s+Set\s+OIML\s+\(?\d+\)?\d*[a-zA-Z]*-\d+[a-zA-Z]*\s+[A-Z]+\d+\s+[A-Za-z]+\s+[A-Z]+",
+                r"Weight\s+Set\s+OIML\s*\(?\d*\)?\s*\d+[a-zA-Z]*-\d+[a-zA-Z]*\s+[A-Z]+\d+\s+[A-Za-z]+\s+[A-Za-z]+",
                 text_block,
                 group=0
             )
+
+            
 
             # model
             model = self._extract_with_regex(r"\(?(\d{6,12})\)?", text_block, group=1)
@@ -101,8 +103,14 @@ class TroemnerScraper:
 
             self.data.append(product_obj.as_dict())
 
-    def save_to_csv(self, filename="troemner_products.csv"):
+    def save_to_csv(self, filename="troemner_products.csv",header=False):
         df = pd.DataFrame(self.data)
+
+        import re
+        df['description'] = df['description'].apply(
+            lambda x: re.sub(r"Item\s*No[:\.]?\s*\d+", "", str(x)).strip()
+        )
+
         df.to_csv(filename, index=False)
         print(f"[+] Saved {len(df)} products to {filename}")
 
