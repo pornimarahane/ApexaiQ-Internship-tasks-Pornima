@@ -35,7 +35,7 @@ class PaloAltoScraper:
         options.add_argument("--no-sandbox")
         self.driver = webdriver.Chrome(service=Service(driver_path), options=options)
 
-        # XPaths where first row contains actual software name
+        # Special xpaths where first row contains real software name
         self.special_software_name_xpaths = {2, 9, 11}
 
         self.xpaths = [
@@ -63,17 +63,16 @@ class PaloAltoScraper:
                 return datetime.strptime(text, fmt).strftime("%Y-%m-%d")
             except:
                 continue
-        return text
+        return text  # keep original if not parseable
 
     def _normalize_row(self, texts):
         """Normalize row into (version, release_date, eol_date)."""
         while len(texts) < 3:
             texts.append("-")
-        version, release_date, eol_date = texts[0:3]
-        return version.strip(), self._normalize_date(release_date), self._normalize_date(eol_date)
+        return texts[0].strip(), self._normalize_date(texts[1]), self._normalize_date(texts[2])
 
-    def _get_software_name(self, xp):
-        """Get section software name from heading tags above the table."""
+    def _get_software_name(self, xp, idx):
+        """Get section software name from heading or fallback."""
         try:
             for tag in ["h2", "h3", "h4", "b", "strong", "p"]:
                 elem = self.driver.find_element(By.XPATH, xp + f"/preceding-sibling::{tag}[1]")
@@ -82,6 +81,10 @@ class PaloAltoScraper:
                     return name
         except:
             pass
+        # For special tables, initial name will be from first row version
+        if idx in self.special_software_name_xpaths:
+            return None
+        # Default: extract from xpath ID
         return xp.split('"')[1]
 
     def scrape(self):
@@ -99,7 +102,7 @@ class PaloAltoScraper:
             if not rows:
                 continue
 
-            software_name = self._get_software_name(xp)
+            software_name = self._get_software_name(xp, idx)
 
             for i, row in enumerate(rows):
                 cells = row.find_elements(By.TAG_NAME, "td")
@@ -108,6 +111,7 @@ class PaloAltoScraper:
 
                 texts = [c.text.strip() for c in cells]
 
+                # Skip header or empty rows
                 if not any(texts):
                     continue
                 if any(word in " ".join(texts).lower() for word in ["version", "release", "end of life", "eol", "support"]):
@@ -115,12 +119,12 @@ class PaloAltoScraper:
 
                 version, release_date, eol_date = self._normalize_row(texts)
 
-                # Shift first row from version to software name for special xpaths
+                # For special xpaths, first row version is the software name
                 if idx in self.special_software_name_xpaths and i == 0:
-                    software_name = version  # move software name from version
-                    continue  # skip this placeholder row
+                    software_name = version
+                    continue  # skip placeholder row
 
-                # Skip rows where version repeats software name
+                # Skip rows that just repeat software_name
                 if version == software_name:
                     continue
 

@@ -62,18 +62,18 @@ prisma-access-browser,126.x.2826.x,2024-06-25,2024-09-23
 prisma-access-browser,126.x.2819.x,2024-06-19,2024-09-17
 prisma-access-browser,126.x.2811.x,2024-06-12,2024-09-10
 prisma-access-browser,125.x.2804.x,2024-05-31,2024-08-29
-qradar,IBM Security QRadar on Cloud,2026-04-14,-
-qradar,IBM Security QRadar Suite – Cloud-Native SIEM,2026-04-14,-
-qradar,IBM Security QRadar Suite – SOAR,2026-04-14,-
-qradar,The SOAR Portion of the Cloud Pak for Security as a Service (excluding Guardium and Identity Access Management portions),2026-04-14,-
-qradar,IBM Security SOAR on Cloud,2026-04-14,-
-qradar,IBM Security Randori Recon,2026-04-14,-
-qradar,IBM Security QRadar Suite – Log Insights,2026-04-14,-
-qradar,IBM Security QRadar Suite – EDR,2026-08-31,-
-qradar,IBM Security QRadar Suite - XDR,2026-08-31,-
-qradar,IBM Security X-Force Threat Intelligence,2026-08-31,-
-qradar,IBM Security Randori Attack,2026-08-31,-
-qradar,IBM Security QRadar Advisor with Watson,2026-08-31,-
+,IBM Security QRadar on Cloud,2026-04-14,-
+,IBM Security QRadar Suite – Cloud-Native SIEM,2026-04-14,-
+,IBM Security QRadar Suite – SOAR,2026-04-14,-
+,The SOAR Portion of the Cloud Pak for Security as a Service (excluding Guardium and Identity Access Management portions),2026-04-14,-
+,IBM Security SOAR on Cloud,2026-04-14,-
+,IBM Security Randori Recon,2026-04-14,-
+,IBM Security QRadar Suite – Log Insights,2026-04-14,-
+,IBM Security QRadar Suite – EDR,2026-08-31,-
+,IBM Security QRadar Suite - XDR,2026-08-31,-
+,IBM Security X-Force Threat Intelligence,2026-08-31,-
+,IBM Security Randori Attack,2026-08-31,-
+,IBM Security QRadar Advisor with Watson,2026-08-31,-
 pan-os-panorama,11.2,2024-05-02,2027-05-02
 pan-os-panorama,11.1,2023-11-03,2027-05-03
 pan-os-panorama,11.0,2022-11-17,2024-11-17
@@ -198,31 +198,31 @@ prisma-cloud-compute,20.12,2020-12-21,2021-09-08
 prisma-cloud-compute,20.09,2020-09-22,2021-04-26
 prisma-cloud-compute,20.04,2020-04-07,2020-12-21
 prisma-cloud-compute,19.11,2019-11-20,2020-09-22
-lightcyber-magna,LightCyber Magna Virtual Appliances,-,-
-lightcyber-magna,"LightCyber Magna Detector Virtual Appliance
+,LightCyber Magna Virtual Appliances,-,-
+,"LightCyber Magna Detector Virtual Appliance
 (D-150V)",2017-12-31,2020-12-31
-lightcyber-magna,"LightCyber Magna Probe Virtual Appliance
+,"LightCyber Magna Probe Virtual Appliance
 (P-50TV)",2017-12-31,2020-12-31
-lightcyber-magna,LightCyber Magna Master Virtual Appliance (M-100V),2017-12-31,2020-12-31
+,LightCyber Magna Master Virtual Appliance (M-100V),2017-12-31,2020-12-31
 evident-io,Evident.io™,-,-
 evident-io,Evident.io,2018-03-26,2020-07-31
-cloudgenix,Prisma SD-WAN,-,-
-cloudgenix,6.5,2025-02-15,2028-02-15
-cloudgenix,6.4,2024-08-09,2026-08-31
-cloudgenix,6.3,2024-02-22,2027-02-28
-cloudgenix,6.2,2023-05-04,2025-05-04
-cloudgenix,6.1,2022-12-23,2026-06-30
-cloudgenix,6.0,2022-11-05,2023-09-01
-cloudgenix,5.6,2021-10-05,2026-06-30
-cloudgenix,5.5,2021-04-11,2023-08-30
-cloudgenix,5.4,2020-08-10,2023-03-31
-cloudgenix,5.2,2020-02-05,2022-01-31
-cloudgenix,5.1,2019-01-31,2022-01-31
-cloudgenix,5.0,2018-08-03,2022-01-31
-cloudgenix,4.7,2018-05-23,2020-03-15
-cloudgenix,4.6,2018-04-04,2020-02-15
-cloudgenix,4.5,2017-09-15,2020-02-15
-cloudgenix,4.4,2017-04-28,2020-02-15
+,Prisma SD-WAN,-,-
+,6.5,2025-02-15,2028-02-15
+,6.4,2024-08-09,2026-08-31
+,6.3,2024-02-22,2027-02-28
+,6.2,2023-05-04,2025-05-04
+,6.1,2022-12-23,2026-06-30
+,6.0,2022-11-05,2023-09-01
+,5.6,2021-10-05,2026-06-30
+,5.5,2021-04-11,2023-08-30
+,5.4,2020-08-10,2023-03-31
+,5.2,2020-02-05,2022-01-31
+,5.1,2019-01-31,2022-01-31
+,5.0,2018-08-03,2022-01-31
+,4.7,2018-05-23,2020-03-15
+,4.6,2018-04-04,2020-02-15
+,4.5,2017-09-15,2020-02-15
+,4.4,2017-04-28,2020-02-15
 brightcloud-subscription,BRIGHTCLOUD Subscription,-,-
 brightcloud-subscription,BrightCloud,2009-01-05,2021-07-31
 vm-series-models,VM-Series Models,-,-
