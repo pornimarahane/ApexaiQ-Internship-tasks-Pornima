@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from datetime import datetime
 
+
 class PaloAltoProduct:
     def __init__(self, software_name, version, release_date, eol_date):
         self.softwareName = software_name
@@ -20,6 +21,7 @@ class PaloAltoProduct:
             "releaseDate": self.releaseDate,
             "eolDate": self.eolDate
         }
+
 
 class PaloAltoScraper:
     def __init__(self, driver_path, url):
@@ -61,14 +63,23 @@ class PaloAltoScraper:
         return text  # keep original if not parseable
 
     def _get_heading(self, table):
-        """Find the heading text above the table."""
-        for tag in ["h2", "h3", "h4", "b", "strong", "p"]:
+        """
+        Find the heading text above the table.
+        Walks up to parent containers until it finds a heading.
+        """
+        current = table
+        while current is not None:
+            for tag in ["h2", "h3", "h4", "b", "strong", "p"]:
+                try:
+                    h = current.find_element(By.XPATH, f"./preceding-sibling::{tag}[1]").text.strip()
+                    if h:
+                        return h
+                except:
+                    continue
             try:
-                h = table.find_element(By.XPATH, f"./preceding-sibling::{tag}[1]").text.strip()
-                if h:
-                    return h
+                current = current.find_element(By.XPATH, "./parent::*")
             except:
-                continue
+                break
         return "Unknown"
 
     def _normalize_row(self, texts, idx):
@@ -79,7 +90,6 @@ class PaloAltoScraper:
         version, release_date, eol_date = "-", "-", "-"
 
         if idx == 2:  # QRadar special case
-            # First column is version, second release, third EOL
             if len(texts) >= 1:
                 version = texts[0]
             if len(texts) >= 2:
@@ -88,7 +98,6 @@ class PaloAltoScraper:
                 eol_date = texts[2]
 
         else:
-            # Normal cases
             if len(texts) == 1:
                 version = texts[0]
             elif len(texts) == 2:
@@ -96,7 +105,6 @@ class PaloAltoScraper:
             elif len(texts) == 3:
                 version, release_date, eol_date = texts
             elif len(texts) >= 4:
-                # Some tables have extra columns → pick first 3 meaningful ones
                 version, release_date, eol_date = texts[0:3]
 
         return (
@@ -128,21 +136,23 @@ class PaloAltoScraper:
 
                 texts = [c.text.strip() for c in cells]
 
-                # Skip redundant header rows
+                # Skip redundant header/empty rows
                 if any(word in " ".join(texts).lower() for word in ["version", "release", "end of life", "eol", "support"]):
+                    continue
+                if not any(texts):
                     continue
 
                 version, release_date, eol_date = self._normalize_row(texts, idx)
 
                 product = PaloAltoProduct(
-                    software_name=heading,
+                    software_name=heading,  # always from heading
                     version=version,
                     release_date=release_date,
                     eol_date=eol_date
                 )
                 self.data.append(product.as_dict())
 
-    def save_to_csv(self, filename="paltoaltosoftware.csv"):
+    def save_to_csv(self, filename="paloalto_software.csv"):
         df = pd.DataFrame(self.data)
         df.to_csv(filename, index=False)
         print(f"[+] Saved {len(df)} records to {filename}")
