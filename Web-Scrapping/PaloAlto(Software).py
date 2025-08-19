@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from datetime import datetime
 
+
 class PaloAltoProduct:
     def __init__(self, software_name, version, release_date, eol_date):
         self.softwareName = software_name
@@ -21,6 +22,7 @@ class PaloAltoProduct:
             "eolDate": self.eolDate
         }
 
+
 class PaloAltoScraper:
     def __init__(self, driver_path, url):
         self.url = url
@@ -32,6 +34,9 @@ class PaloAltoScraper:
         options.add_argument("--disable-gpu")
         options.add_argument("--no-sandbox")
         self.driver = webdriver.Chrome(service=Service(driver_path), options=options)
+
+        # Special xpaths where first row contains real software name
+        self.special_software_name_xpaths = {2, 9, 11}
 
         self.xpaths = [
             '//*[@id="prisma-access-browser"]',
@@ -60,79 +65,88 @@ class PaloAltoScraper:
                 continue
         return text  # keep original if not parseable
 
+    def _normalize_row(self, texts):
+        """Normalize row into (version, release_date, eol_date)."""
+        while len(texts) < 3:
+            texts.append("-")
+        return texts[0].strip(), self._normalize_date(texts[1]), self._normalize_date(texts[2])
+
+    def _get_software_name(self, xp, idx):
+        """Get section software name from heading or fallback."""
+        try:
+            for tag in ["h2", "h3", "h4", "b", "strong", "p"]:
+                elem = self.driver.find_element(By.XPATH, xp + f"/preceding-sibling::{tag}[1]")
+                name = elem.text.strip()
+                if name:
+                    return name
+        except:
+            pass
+        # For special tables, initial name will be from first row version
+        if idx in self.special_software_name_xpaths:
+            return None
+        # Default: extract from xpath ID
+        return xp.split('"')[1]
+
     def scrape(self):
         self.driver.get(self.url)
         time.sleep(3)
 
-        for i, xp in enumerate(self.xpaths, start=1):
+        for idx, xp in enumerate(self.xpaths, start=1):
             try:
                 table = self.driver.find_element(By.XPATH, xp)
             except:
                 print(f"[!] Table not found for xpath: {xp}")
                 continue
 
-            # --- Get heading ---
-            heading = "Unknown"
-            for tag in ["h2", "h3", "b", "strong", "p"]:
-                try:
-                    h = table.find_element(By.XPATH, f"./preceding-sibling::{tag}[1]").text.strip()
-                    if h:
-                        heading = h
-                        break
-                except:
-                    continue
-
             rows = table.find_elements(By.XPATH, ".//tr")
             if not rows:
                 continue
 
-            for row in rows:
+            software_name = self._get_software_name(xp, idx)
+            special_first_version = None
+
+            for i, row in enumerate(rows):
                 cells = row.find_elements(By.TAG_NAME, "td")
                 if not cells:
                     continue
 
                 texts = [c.text.strip() for c in cells]
 
-                # skip header-like rows
-                if any(x.lower() in ["version", "release", "end of life", "eol", "standard support"] for x in texts):
+                # Skip header or empty rows
+                if not any(texts):
+                    continue
+                if any(word in " ".join(texts).lower() for word in ["version", "release", "end of life", "eol", "support"]):
                     continue
 
-                # defaults
-                product_name = heading
-                version, release_date, eol_date = "-", "-", "-"
+                version, release_date, eol_date = self._normalize_row(texts)
 
-                # handle based on column count
-                if len(texts) == 2:
-                    version, eol_date = texts
-                elif len(texts) == 3:
-                    version, release_date, eol_date = texts
-                elif len(texts) >= 4:
-                    product_name, version, release_date, eol_date = texts[:4]
+                # For special xpaths, first row version is the software name
+                if idx in self.special_software_name_xpaths and special_first_version is None:
+                    special_first_version = version
+                    software_name = special_first_version
+                    continue  # skip this placeholder row
 
-                # QRadar special rule (append heading)
-                if i == 2:
-                    product_name = f"{heading} ({texts[0]})"
+                # If row version equals first special row, shift it to name
+                if idx in self.special_software_name_xpaths and version == special_first_version:
+                    version = "-"  # leave version blank since it shifted
+                    software_name = special_first_version
 
-                release_date = self._normalize_date(release_date)
-                eol_date = self._normalize_date(eol_date)
+                # For normal tables, skip rows that just repeat software_name
+                if version == software_name and idx not in self.special_software_name_xpaths:
+                    continue
 
                 product = PaloAltoProduct(
-                    software_name=product_name,
+                    software_name=software_name,
                     version=version,
                     release_date=release_date,
                     eol_date=eol_date
                 )
                 self.data.append(product.as_dict())
 
-    def save_to_csv(self, filename="paltoaltosoftware.csv"):
+    def save_to_csv(self, filename="PaloAlto(Software).csv"):
         df = pd.DataFrame(self.data)
-
-        # Keep only softwareName column
-        if "softwareName" in df.columns:
-            df = df[["softwareName"]]
-
         df.to_csv(filename, index=False)
-        print(f"[+] Saved {len(df)} software names to {filename}")
+        print(f"[+] Saved {len(df)} records to {filename}")
 
     def close(self):
         self.driver.quit()
@@ -147,3 +161,4 @@ if __name__ == "__main__":
     scraper.scrape()
     scraper.save_to_csv()
     scraper.close()
+
