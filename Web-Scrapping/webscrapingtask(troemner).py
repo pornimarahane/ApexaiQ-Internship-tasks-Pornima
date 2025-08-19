@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
 class TroemnerProduct:
-    """Represents a single Troemner product with 6 required fields."""
+    
     def __init__(self, vendor, product_name, model, description, url, cost):
         self.vendor = vendor
         self.productName = product_name
@@ -27,7 +27,7 @@ class TroemnerProduct:
         }
 
 class TroemnerScraper:
-    """Scraper for Troemner OIML Calibration Weight Sets"""
+  
     def __init__(self, driver_path, url):
         self.url = url
         self.driver_path = driver_path
@@ -46,25 +46,25 @@ class TroemnerScraper:
     def scrape(self):
         self.driver.get(self.url)
 
-        # ✅ Scroll until all products are loaded
+       
         last_height = self.driver.execute_script("return document.body.scrollHeight")
         while True:
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(2)  # wait for new items to load
+            time.sleep(2)  
 
             new_height = self.driver.execute_script("return document.body.scrollHeight")
             if new_height == last_height:
                 break
             last_height = new_height
 
-        # ✅ Collect all product elements
+        
         products = self.driver.find_elements(By.XPATH, '//ul[@id="resultsList"]/li')
         print(f"[+] Found {len(products)} products")
 
         for product in products:
             text_block = product.text.strip()
 
-            # productName
+           
             product_name = self._extract_with_regex(
                 r"Weight\s+Set\s+OIML\s*\(?\d*\)?\s*\d+[a-zA-Z]*-\d+[a-zA-Z]*\s+[A-Z]+\d+\s+[A-Za-z]+\s+[A-Za-z]+",
                 text_block,
@@ -73,19 +73,18 @@ class TroemnerScraper:
 
             
 
-            # model
             model = self._extract_with_regex(r"\(?(\d{6,12})\)?", text_block, group=1)
 
-            # cost
+            
             cost = self._extract_with_regex(r"\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?", text_block)
 
-            # url
+          
             try:
                 url = product.find_element(By.TAG_NAME, "a").get_attribute("href")
             except:
                 url = None
 
-            # description
+        
             description = re.sub(r"^.*?(?=\n)", "", text_block, flags=re.DOTALL).strip()
             description = re.sub(r"Calibration Certificate.*", "", description, flags=re.DOTALL)
             description = re.sub(r"OIML Class.*", "", description, flags=re.DOTALL)
@@ -111,7 +110,7 @@ class TroemnerScraper:
             lambda x: re.sub(r"Item\s*No[:\.]?\s*\d+", "", str(x)).strip()
         )
 
-        df.to_csv(filename, index=False)
+        df.to_csv(filename="./troemner_products.csv", index=False)
         print(f"[+] Saved {len(df)} products to {filename}")
 
     def close(self):
