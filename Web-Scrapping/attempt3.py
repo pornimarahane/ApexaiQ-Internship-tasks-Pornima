@@ -35,12 +35,8 @@ class PaloAltoScraper:
         options.add_argument("--no-sandbox")
         self.driver = webdriver.Chrome(service=Service(driver_path), options=options)
 
-        # List of xpaths that need software name shifted from version column
-        self.special_software_name_xpaths = {
-            2: "qradar",        # XPath 2
-            9: "lightcyber-magna",  # XPath 9
-            11: "Prisma SD-WAN"  # XPath 11
-        }
+        # Special xpaths where first row contains real software name
+        self.special_software_name_xpaths = {2, 9, 11}
 
         self.xpaths = [
             '//*[@id="prisma-access-browser"]',
@@ -70,33 +66,33 @@ class PaloAltoScraper:
         return text  # keep original if not parseable
 
     def _normalize_row(self, texts, idx):
-        """
-        Normalize row into (version, release_date, eol_date).
-        """
-        version, release_date, eol_date = "-", "-", "-"
+        """Normalize row into (version, release_date, eol_date)."""
+        while len(texts) < 3:
+            texts.append("-")
 
         if idx == 2:  # QRadar special case
-            if len(texts) >= 1:
-                version = texts[0]
-            if len(texts) >= 2:
-                release_date = texts[1]
-            if len(texts) >= 3:
-                eol_date = texts[2]
+            version, release_date, eol_date = texts[0:3]
         else:
-            if len(texts) == 1:
-                version = texts[0]
-            elif len(texts) == 2:
-                version, eol_date = texts
-            elif len(texts) == 3:
-                version, release_date, eol_date = texts
-            elif len(texts) >= 4:
-                version, release_date, eol_date = texts[0:3]
+            version, release_date, eol_date = texts[0:3]
 
-        return (
-            version.strip(),
-            self._normalize_date(release_date),
-            self._normalize_date(eol_date),
-        )
+        return version.strip(), self._normalize_date(release_date), self._normalize_date(eol_date)
+
+    def _get_software_name(self, xp, idx):
+        """Get section software name from heading or special case."""
+        try:
+            # Try common heading tags above the table
+            for tag in ["h2", "h3", "h4", "b", "strong", "p"]:
+                elem = self.driver.find_element(By.XPATH, xp + f"/preceding-sibling::{tag}[1]")
+                name = elem.text.strip()
+                if name:
+                    return name
+        except:
+            pass
+        # Fallback: use special hardcoded names for some tables
+        if idx in self.special_software_name_xpaths:
+            return None
+        # Default: extract from xpath
+        return xp.split('"')[1]
 
     def scrape(self):
         self.driver.get(self.url)
@@ -113,13 +109,7 @@ class PaloAltoScraper:
             if not rows:
                 continue
 
-            # ---------------- Get Software Name for this section ----------------
-            try:
-                software_name_elem = self.driver.find_element(By.XPATH, xp + "/preceding-sibling::h2[1]")
-                software_name = software_name_elem.text.strip()
-            except:
-                # fallback
-                software_name = xp.split('"')[1]
+            software_name = self._get_software_name(xp, idx)
 
             for i, row in enumerate(rows):
                 cells = row.find_elements(By.TAG_NAME, "td")
@@ -128,21 +118,20 @@ class PaloAltoScraper:
 
                 texts = [c.text.strip() for c in cells]
 
-                # Skip redundant header/empty rows
-                if any(word in " ".join(texts).lower() for word in ["version", "release", "end of life", "eol", "support"]):
-                    continue
+                # Skip header or empty rows
                 if not any(texts):
+                    continue
+                if any(word in " ".join(texts).lower() for word in ["version", "release", "end of life", "eol", "support"]):
                     continue
 
                 version, release_date, eol_date = self._normalize_row(texts, idx)
 
-                # ---------------- Handle special xpaths where software name is in version column ----------------
+                # Handle special cases where first row contains real software name
                 if idx in self.special_software_name_xpaths and i == 0:
-                    # First row has the real software name
-                    software_name = version
-                    continue  # skip adding this placeholder row
+                    software_name = version  # take software name from version
+                    continue  # skip this placeholder row
 
-                # Skip rows that just repeat software_name in version
+                # Skip rows that just repeat software_name
                 if version == software_name:
                     continue
 
@@ -154,7 +143,7 @@ class PaloAltoScraper:
                 )
                 self.data.append(product.as_dict())
 
-    def save_to_csv(self, filename="paloalto_software2.csv"):
+    def save_to_csv(self, filename="paloalto_software.csv"):
         df = pd.DataFrame(self.data)
         df.to_csv(filename, index=False)
         print(f"[+] Saved {len(df)} records to {filename}")
