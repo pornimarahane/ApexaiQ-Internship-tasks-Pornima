@@ -62,30 +62,9 @@ class PaloAltoScraper:
                 continue
         return text  # keep original if not parseable
 
-    def _get_heading(self, table):
-        """
-        Find the heading text above the table.
-        Walks up to parent containers until it finds a heading.
-        """
-        current = table
-        while current is not None:
-            for tag in ["h2", "h3", "h4", "b", "strong", "p"]:
-                try:
-                    h = current.find_element(By.XPATH, f"./preceding-sibling::{tag}[1]").text.strip()
-                    if h:
-                        return h
-                except:
-                    continue
-            try:
-                current = current.find_element(By.XPATH, "./parent::*")
-            except:
-                break
-        return "Unknown"
-
     def _normalize_row(self, texts, idx):
         """
         Normalize row into (version, release_date, eol_date).
-        Software name always comes from heading, never from inside row.
         """
         version, release_date, eol_date = "-", "-", "-"
 
@@ -96,7 +75,6 @@ class PaloAltoScraper:
                 release_date = texts[1]
             if len(texts) >= 3:
                 eol_date = texts[2]
-
         else:
             if len(texts) == 1:
                 version = texts[0]
@@ -124,7 +102,6 @@ class PaloAltoScraper:
                 print(f"[!] Table not found for xpath: {xp}")
                 continue
 
-            heading = self._get_heading(table)
             rows = table.find_elements(By.XPATH, ".//tr")
             if not rows:
                 continue
@@ -144,8 +121,13 @@ class PaloAltoScraper:
 
                 version, release_date, eol_date = self._normalize_row(texts, idx)
 
+                # ---------------- FIX: Shift version → softwareName ----------------
+                software_name = version
+                version = "-"  # clear version since it's actually product name
+                # ------------------------------------------------------------------
+
                 product = PaloAltoProduct(
-                    software_name=heading,  # always from heading
+                    software_name=software_name,
                     version=version,
                     release_date=release_date,
                     eol_date=eol_date
