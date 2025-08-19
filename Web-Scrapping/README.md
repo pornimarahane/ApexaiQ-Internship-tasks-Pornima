@@ -35,8 +35,8 @@ Task 4: In this task i have scraped the "https://www.paloaltonetworks.com/servic
 [View File](https://github.com/pornimarahane/ApexaiQ-Internship-tasks-Pornima/blob/main/Web-Scrapping/PaloAlto(Hardware).py)
 [View File](https://github.com/pornimarahane/ApexaiQ-Internship-tasks-Pornima/blob/main/Web-Scrapping/PaloAlto(Hardware).csv)
 
-Task 5: In this task i have scraped the "https://www.paloaltonetworks.com/services/support/end-of-life-announcements/end-of-life-summary" and extracted the Software Name,  version, EOL Date, EOL Date, Release Date columns from it. 
-[View File](https://github.com/pornimarahane/ApexaiQ-Internship-tasks-Pornima/blob/main/Web-Scrapping/PaloAlto(Software).py)
+Task 5: In this task i have scraped the "https://www.paloaltonetworks.com/services/support/end-of-life-announcements/end-of-life-summary" and extracted the Software Name,  version, EOL Date, EOL Date, Release Date columns from it.  
+[View File](https://github.com/pornimarahane/ApexaiQ-Internship-tasks-Pornima/blob/main/Web-Scrapping/PaloAlto(Software).py)  
 [View File](https://github.com/pornimarahane/ApexaiQ-Internship-tasks-Pornima/blob/main/Web-Scrapping/PaloAlto(Software).csv)
 
 
