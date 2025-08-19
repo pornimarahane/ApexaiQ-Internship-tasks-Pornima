@@ -103,6 +103,7 @@ class PaloAltoScraper:
                 continue
 
             software_name = self._get_software_name(xp, idx)
+            special_first_version = None
 
             for i, row in enumerate(rows):
                 cells = row.find_elements(By.TAG_NAME, "td")
@@ -120,12 +121,18 @@ class PaloAltoScraper:
                 version, release_date, eol_date = self._normalize_row(texts)
 
                 # For special xpaths, first row version is the software name
-                if idx in self.special_software_name_xpaths and i == 0:
-                    software_name = version
-                    continue  # skip placeholder row
+                if idx in self.special_software_name_xpaths and special_first_version is None:
+                    special_first_version = version
+                    software_name = special_first_version
+                    continue  # skip this placeholder row
 
-                # Skip rows that just repeat software_name
-                if version == software_name:
+                # If row version equals first special row, shift it to name
+                if idx in self.special_software_name_xpaths and version == special_first_version:
+                    version = "-"  # leave version blank since it shifted
+                    software_name = special_first_version
+
+                # For normal tables, skip rows that just repeat software_name
+                if version == software_name and idx not in self.special_software_name_xpaths:
                     continue
 
                 product = PaloAltoProduct(
