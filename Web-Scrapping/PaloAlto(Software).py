@@ -37,7 +37,7 @@ class PaloAltoScraper:
         # 13 XPaths provided
         self.xpaths = [
             '//*[@id="prisma-access-browser"]',
-
+            '//*[@id="qradar"]/following-sibling::table[1]',
             '//*[@id="pan-os-panorama"]',
             '//*[@id="panorama-plugin"]',
             '//*[@id="traps-esm-and-cortex"]',
@@ -52,53 +52,141 @@ class PaloAltoScraper:
         ]
 
     def _normalize_date(self, text):
-        if not text:
-            return "null"
+        if not text or text.strip() in ["-", "null", ""]:
+            return "-"
         text = text.strip()
-        # try common formats
-        for fmt in ["%m/%d/%Y", "%m/%d/%y", "%B %d, %Y", "%b %d, %Y"]:
+        for fmt in ["%m/%d/%Y", "%m/%d/%y", "%B %d, %Y", "%b %d, %Y", "%B %Y"]:
             try:
                 return datetime.strptime(text, fmt).strftime("%Y-%m-%d")
             except:
                 continue
-        return "null"
+        return "-"
+
+    def _get_column_index(self, header_row, column_name):
+        """Find index of a column by name in header row"""
+        for idx, cell in enumerate(header_row.find_elements(By.TAG_NAME, "td")):
+            if column_name.lower() in cell.text.lower():
+                return idx
+        return None
 
     def scrape(self):
         self.driver.get(self.url)
         time.sleep(3)
 
-        for xp in self.xpaths:
+        for i, xp in enumerate(self.xpaths, start=1):
             try:
                 table = self.driver.find_element(By.XPATH, xp)
             except:
                 print(f"[!] Table not found for xpath: {xp}")
                 continue
 
-            # software name = heading just above table
-            try:
-                heading = table.find_element(By.XPATH, "./preceding-sibling::h2[1]").text.strip()
-            except:
+            # --- Get heading ---
+            heading = "Unknown"
+            for tag in ["h2", "h3", "b", "strong", "p"]:
                 try:
-                    heading = table.find_element(By.XPATH, "./preceding-sibling::h3[1]").text.strip()
+                    heading = table.find_element(By.XPATH, f"./preceding-sibling::{tag}[1]").text.strip()
+                    if heading:
+                        break
                 except:
-                    heading = "Unknown"
+                    continue
 
-            rows = table.find_elements(By.XPATH, ".//tr[position()>1]")  # skip header row
-            for row in rows:
+            # --- Handle rows ---
+            rows = table.find_elements(By.XPATH, ".//tr")
+            if not rows:
+                continue
+
+            header_cells = rows[0].find_elements(By.TAG_NAME, "td")
+            header_texts = [c.text.strip().lower() for c in header_cells]
+
+            # Identify column indices dynamically
+            version_idx = None
+            eol_idx = None
+            release_idx = None
+            for j, h in enumerate(header_texts):
+                if "version" in h:
+                    version_idx = j
+                if "end" in h:
+                    eol_idx = j
+                if "release" in h:
+                    release_idx = j
+                if "standard support" in h:   # special case for panorama
+                    eol_idx = j
+
+            # Loop rows
+            for row in rows[1:]:
                 cells = row.find_elements(By.TAG_NAME, "td")
                 if not cells:
                     continue
 
-                version = cells[0].text.strip() if len(cells) > 0 else "null"
-                release_date = cells[1].text.strip() if len(cells) > 2 else "null"
-                eol_date = cells[-1].text.strip() if cells else "null"
+                # --- Default values ---
+                product_name = heading
+                version = "-"
+                release_date = "-"
+                eol_date = "-"
 
+                # Handle special XPath cases by number
+                if i == 1:  # Prisma Access Browser
+                    product_name = "Prisma Access Browser"
+                    version = cells[0].text.strip() if len(cells) > 0 else "-"
+                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
+
+                elif i == 2:  # QRadar SaaS Products
+                    product_name = "Threat Management (including QRadar)"
+                    version = "-"
+                    release_date = "-"
+                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+
+                elif i == 3:  # PAN-OS & Panorama
+                    product_name = heading
+                    version = cells[0].text.strip() if version_idx is not None and len(cells) > version_idx else "-"
+                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
+
+                elif i == 4:  # Panorama Plugin
+                    subtype = cells[0].text.strip()
+                    product_name = f"{heading} - {subtype}"
+                    version = cells[1].text.strip() if len(cells) > 1 else "-"
+                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
+
+                elif i == 5:  # Traps ESM and Cortex
+                    product_name = heading
+                    version = cells[0].text.strip() if len(cells) > 0 else "-"
+                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
+
+                elif i == 6:  # Cortex XSOAR (no release date)
+                    product_name = heading
+                    version = cells[0].text.strip() if len(cells) > 0 else "-"
+                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                    release_date = "-"
+
+                elif i in [7, 8, 11]:  # GlobalProtect, Prisma Cloud Compute, CloudGenix
+                    product_name = heading
+                    version = cells[0].text.strip() if len(cells) > 0 else "-"
+                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
+
+                elif i in [9, 12, 13]:  # Lightcyber Magna, Brightcloud, VM-Series
+                    product_name = heading
+                    version = "-"
+                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
+
+                elif i == 10:  # Evident.io (no version but has release + eol)
+                    product_name = heading
+                    version = "-"
+                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
+
+                # Normalize dates
                 release_date = self._normalize_date(release_date)
                 eol_date = self._normalize_date(eol_date)
 
                 product = PaloAltoProduct(
-                    software_name=heading,
-                    version=version if version else "null",
+                    software_name=product_name,
+                    version=version,
                     release_date=release_date,
                     eol_date=eol_date
                 )
