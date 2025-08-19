@@ -126,13 +126,8 @@ class PaloAltoScraper:
 
     def save_to_csv(self, filename="paltoaltosoftware.csv"):
         df = pd.DataFrame(self.data)
-
-        # Keep only softwareName column
-        if "softwareName" in df.columns:
-            df = df[["softwareName"]]
-
         df.to_csv(filename, index=False)
-        print(f"[+] Saved {len(df)} software names to {filename}")
+        print(f"[+] Saved {len(df)} records to {filename}")
 
     def close(self):
         self.driver.quit()
