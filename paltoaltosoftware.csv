@@ -1,6 +1,6 @@
 softwareName,version,releaseDate,eolDate
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,Prisma Access Browser,-,-
 Unknown,139.12.x.x,2025-08-13,2025-11-11
 Unknown,139.7.x.x,2025-08-07,2025-11-05
 Unknown,138.69.x.x,2025-07-30,2025-10-28
@@ -99,8 +99,8 @@ Unknown,3.0,2009-06-17,2010-12-17
 Unknown,2.1,2009-01-05,2012-01-05
 Unknown,2.0,2008-05-20,2009-05-20
 Unknown,1.3,2007-11-15,2008-11-20
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,Panorama Plugins,-,-
 Unknown,5.3.4,2025-02-20,Latest
 Unknown,5.3.3,2025-02-14,2025-05-01
 Unknown,5.3.2,2025-01-16,2025-05-01
@@ -124,8 +124,8 @@ Unknown,2.0.1,2020-03-09,2024-08-01
 Unknown,2.0.0,2020-01-14,2024-08-01
 Unknown,1.0.1,2020-03-09,2024-08-01
 Unknown,1.0.0,2019-08-24,2024-08-01
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,"Traps, ESM and Cortex XDR agent",-,-
 Unknown,8.9 (Cortex XDR agent),2025-07-21,2026-04-21
 Unknown,8.8 (Cortex XDR agent),2025-04-28,2026-02-18
 Unknown,8.7.100 CE (Cortex XDR agent),2025-07-02,2027-07-02
@@ -161,9 +161,9 @@ Unknown,3.4,2016-08-21,2019-08-21
 Unknown,3.3,2015-11-10,2017-02-28
 Unknown,3.2,2015-03-31,2016-03-31
 Unknown,3.1,"September 3rd, 2014",2015-09-03
-Unknown,-,-,-
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,,-,-
+Unknown,Cortex XSOAR,-,-
 Unknown,8.8,-,2026-01-06
 Unknown,8.7,-,"Sept 17, 2025"
 Unknown,8.6,-,2025-07-14
@@ -180,9 +180,9 @@ Unknown,6.2,-,2022-05-01
 Unknown,6.1,-,2022-02-08
 Unknown,6.0,-,2021-06-08
 Unknown,5.5,-,2021-10-01
-Unknown,-,-,-
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,,-,-
+Unknown,GlobalProtect™,-,-
 Unknown,6.3,2024-06-13,2026-06-13
 Unknown,6.2,2023-05-23,2026-12-31
 Unknown,6.1,2022-09-01,2025-03-01
@@ -195,8 +195,8 @@ Unknown,4.1,2018-03-01,2019-06-01
 Unknown,4.0,2017-01-30,2018-05-02
 Unknown,3.1,2016-06-23,2017-09-23
 Unknown,3.0,2016-02-16,2017-05-18
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,Prisma Cloud Compute Edition,-,-
 Unknown,22.12,2022-12-04,2023-12-03
 Unknown,22.06,2022-06-09,2023-08-20
 Unknown,22.01,2022-01-10,2023-04-23
@@ -206,18 +206,18 @@ Unknown,20.12,2020-12-21,2021-09-08
 Unknown,20.09,2020-09-22,2021-04-26
 Unknown,20.04,2020-04-07,2020-12-21
 Unknown,19.11,2019-11-20,2020-09-22
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,LightCyber Magna Virtual Appliances,-,-
 Unknown,"LightCyber Magna Detector Virtual Appliance
 (D-150V)",2017-12-31,2020-12-31
 Unknown,"LightCyber Magna Probe Virtual Appliance
 (P-50TV)",2017-12-31,2020-12-31
 Unknown,LightCyber Magna Master Virtual Appliance (M-100V),2017-12-31,2020-12-31
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,Evident.io™,-,-
 Unknown,Evident.io,2018-03-26,2020-07-31
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,Prisma SD-WAN,-,-
 Unknown,6.5,2025-02-15,2028-02-15
 Unknown,6.4,2024-08-09,2026-08-31
 Unknown,6.3,2024-02-22,2027-02-28
@@ -234,10 +234,10 @@ Unknown,4.7,2018-05-23,2020-03-15
 Unknown,4.6,2018-04-04,2020-02-15
 Unknown,4.5,2017-09-15,2020-02-15
 Unknown,4.4,2017-04-28,2020-02-15
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,BRIGHTCLOUD Subscription,-,-
 Unknown,BrightCloud,2009-01-05,2021-07-31
-Unknown,-,-,-
-Unknown,-,-,-
+Unknown,,-,-
+Unknown,VM-Series Models,-,-
 Unknown,"VM-Series Models
 (VM-50, VM-100, VM-200, VM-300, VM-500, VM-700, VM-1000-HV)",2021-07-31,2024-07-31

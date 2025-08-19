@@ -71,6 +71,40 @@ class PaloAltoScraper:
                 continue
         return "Unknown"
 
+    def _normalize_row(self, texts, idx):
+        """
+        Normalize row into (version, release_date, eol_date).
+        Software name always comes from heading, never from inside row.
+        """
+        version, release_date, eol_date = "-", "-", "-"
+
+        if idx == 2:  # QRadar special case
+            # First column is version, second release, third EOL
+            if len(texts) >= 1:
+                version = texts[0]
+            if len(texts) >= 2:
+                release_date = texts[1]
+            if len(texts) >= 3:
+                eol_date = texts[2]
+
+        else:
+            # Normal cases
+            if len(texts) == 1:
+                version = texts[0]
+            elif len(texts) == 2:
+                version, eol_date = texts
+            elif len(texts) == 3:
+                version, release_date, eol_date = texts
+            elif len(texts) >= 4:
+                # Some tables have extra columns → pick first 3 meaningful ones
+                version, release_date, eol_date = texts[0:3]
+
+        return (
+            version.strip(),
+            self._normalize_date(release_date),
+            self._normalize_date(eol_date),
+        )
+
     def scrape(self):
         self.driver.get(self.url)
         time.sleep(3)
@@ -94,30 +128,11 @@ class PaloAltoScraper:
 
                 texts = [c.text.strip() for c in cells]
 
-                # Skip header or redundant rows
+                # Skip redundant header rows
                 if any(word in " ".join(texts).lower() for word in ["version", "release", "end of life", "eol", "support"]):
                     continue
 
-                version, release_date, eol_date = "-", "-", "-"
-
-                # Special handling for QRadar (2nd xpath)
-                if idx == 2:
-                    # QRadar tables: first column is the actual version
-                    if len(texts) >= 2:
-                        version = texts[0]
-                        release_date = texts[1] if len(texts) > 1 else "-"
-                        eol_date = texts[2] if len(texts) > 2 else "-"
-                else:
-                    # Normal case: [version, release_date, eol_date]
-                    if len(texts) == 2:
-                        version, eol_date = texts
-                    elif len(texts) == 3:
-                        version, release_date, eol_date = texts
-                    elif len(texts) >= 4:
-                        version, release_date, eol_date = texts[0:3]
-
-                release_date = self._normalize_date(release_date)
-                eol_date = self._normalize_date(eol_date)
+                version, release_date, eol_date = self._normalize_row(texts, idx)
 
                 product = PaloAltoProduct(
                     software_name=heading,
