@@ -35,7 +35,7 @@ class PaloAltoScraper:
 
         self.xpaths = [
             '//*[@id="prisma-access-browser"]',
-            '//*[@id="qradar"]/following-sibling::table[1]',
+            '//*[@id="qradar"]/following-sibling::table[1]',  # QRadar special case
             '//*[@id="pan-os-panorama"]',
             '//*[@id="panorama-plugin"]',
             '//*[@id="traps-esm-and-cortex"]',
@@ -60,28 +60,29 @@ class PaloAltoScraper:
                 continue
         return text  # keep original if not parseable
 
+    def _get_heading(self, table):
+        """Find the heading text above the table."""
+        for tag in ["h2", "h3", "h4", "b", "strong", "p"]:
+            try:
+                h = table.find_element(By.XPATH, f"./preceding-sibling::{tag}[1]").text.strip()
+                if h:
+                    return h
+            except:
+                continue
+        return "Unknown"
+
     def scrape(self):
         self.driver.get(self.url)
         time.sleep(3)
 
-        for i, xp in enumerate(self.xpaths, start=1):
+        for idx, xp in enumerate(self.xpaths, start=1):
             try:
                 table = self.driver.find_element(By.XPATH, xp)
             except:
                 print(f"[!] Table not found for xpath: {xp}")
                 continue
 
-            # --- Get heading ---
-            heading = "Unknown"
-            for tag in ["h2", "h3", "b", "strong", "p"]:
-                try:
-                    h = table.find_element(By.XPATH, f"./preceding-sibling::{tag}[1]").text.strip()
-                    if h:
-                        heading = h
-                        break
-                except:
-                    continue
-
+            heading = self._get_heading(table)
             rows = table.find_elements(By.XPATH, ".//tr")
             if not rows:
                 continue
@@ -93,31 +94,33 @@ class PaloAltoScraper:
 
                 texts = [c.text.strip() for c in cells]
 
-                # skip header-like rows
-                if any(x.lower() in ["version", "release", "end of life", "eol", "standard support"] for x in texts):
+                # Skip header or redundant rows
+                if any(word in " ".join(texts).lower() for word in ["version", "release", "end of life", "eol", "support"]):
                     continue
 
-                # defaults
-                product_name = heading
                 version, release_date, eol_date = "-", "-", "-"
 
-                # handle based on column count
-                if len(texts) == 2:
-                    version, eol_date = texts
-                elif len(texts) == 3:
-                    version, release_date, eol_date = texts
-                elif len(texts) >= 4:
-                    product_name, version, release_date, eol_date = texts[:4]
-
-                # QRadar special rule (append heading)
-                if i == 2:
-                    product_name = f"{heading} ({texts[0]})"
+                # Special handling for QRadar (2nd xpath)
+                if idx == 2:
+                    # QRadar tables: first column is the actual version
+                    if len(texts) >= 2:
+                        version = texts[0]
+                        release_date = texts[1] if len(texts) > 1 else "-"
+                        eol_date = texts[2] if len(texts) > 2 else "-"
+                else:
+                    # Normal case: [version, release_date, eol_date]
+                    if len(texts) == 2:
+                        version, eol_date = texts
+                    elif len(texts) == 3:
+                        version, release_date, eol_date = texts
+                    elif len(texts) >= 4:
+                        version, release_date, eol_date = texts[0:3]
 
                 release_date = self._normalize_date(release_date)
                 eol_date = self._normalize_date(eol_date)
 
                 product = PaloAltoProduct(
-                    software_name=product_name,
+                    software_name=heading,
                     version=version,
                     release_date=release_date,
                     eol_date=eol_date
