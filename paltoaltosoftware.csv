@@ -1,6 +1,5 @@
 softwareName,version,releaseDate,eolDate
 Prisma Access Browser,Prisma Access Browser,-,-
-Prisma Access Browser,Version,-,-
 Prisma Access Browser,139.12.x.x,-,-
 Prisma Access Browser,139.7.x.x,-,-
 Prisma Access Browser,138.69.x.x,-,-
@@ -63,18 +62,18 @@ Prisma Access Browser,126.x.2826.x,-,-
 Prisma Access Browser,126.x.2819.x,-,-
 Prisma Access Browser,126.x.2811.x,-,-
 Prisma Access Browser,125.x.2804.x,-,-
-Threat Management (including QRadar),-,-,2026-04-14
-Threat Management (including QRadar),-,-,2026-04-14
-Threat Management (including QRadar),-,-,2026-04-14
-Threat Management (including QRadar),-,-,2026-04-14
-Threat Management (including QRadar),-,-,2026-04-14
-Threat Management (including QRadar),-,-,2026-04-14
-Threat Management (including QRadar),-,-,2026-04-14
-Threat Management (including QRadar),-,-,2026-08-31
-Threat Management (including QRadar),-,-,2026-08-31
-Threat Management (including QRadar),-,-,2026-08-31
-Threat Management (including QRadar),-,-,2026-08-31
-Threat Management (including QRadar),-,-,2026-08-31
+ (IBM Security QRadar on Cloud),-,-,2026-04-14
+ (IBM Security QRadar Suite – Cloud-Native SIEM),-,-,2026-04-14
+ (IBM Security QRadar Suite – SOAR),-,-,2026-04-14
+ (The SOAR Portion of the Cloud Pak for Security as a Service (excluding Guardium and Identity Access Management portions)),-,-,2026-04-14
+ (IBM Security SOAR on Cloud),-,-,2026-04-14
+ (IBM Security Randori Recon),-,-,2026-04-14
+ (IBM Security QRadar Suite – Log Insights),-,-,2026-04-14
+ (IBM Security QRadar Suite – EDR),-,-,2026-08-31
+ (IBM Security QRadar Suite - XDR),-,-,2026-08-31
+ (IBM Security X-Force Threat Intelligence),-,-,2026-08-31
+ (IBM Security Randori Attack),-,-,2026-08-31
+ (IBM Security QRadar Advisor with Watson),-,-,2026-08-31
 Unknown,-,-,-
 Unknown,-,-,-
 Unknown,-,-,-
@@ -99,115 +98,6 @@ Unknown,-,-,-
 Unknown,-,-,-
 Unknown,-,-,-
 Unknown,-,-,-
-Unknown - Panorama Plugins,-,-,-
-Unknown - AWS Version,Release Date,-,-
-Unknown - 5.3.4,"February 20, 2025",-,-
-Unknown - 5.3.3,"February 14, 2025",-,-
-Unknown - 5.3.2,"January 16, 2025",-,-
-Unknown - 5.3.1,"November 22, 2024",-,-
-Unknown - 5.3.0,"October 10, 2024",-,-
-Unknown - 5.2.2,"April 25, 2024",-,-
-Unknown - 5.2.1,"March 28, 2024",-,-
-Unknown - 5.2.0,"February 15, 2024",-,-
-Unknown - 5.1.3,"October 10, 2024",-,-
-Unknown - 5.1.2,"September 24, 2024",-,-
-Unknown - 5.1.1,"July 19, 2023",-,-
-Unknown - 5.0.1,"May 24, 2023",-,-
-Unknown - 5.0.0,"March 23, 2023",-,-
-Unknown - 4.1.0,"January 24, 2023",-,-
-Unknown - 4.0.0,"February 24, 2022",-,-
-Unknown - 3.0.3 (support 10.1),"September 7, 2022",-,-
-Unknown - 3.0.2,"January 24, 2022",-,-
-Unknown - 3.0.1,"September 02, 2021",-,-
-Unknown - 3.0.0,"August 06, 2021",-,-
-Unknown - 2.0.2 (9.1),"August 06, 2020",-,-
-Unknown - 2.0.1,"March 09, 2020",-,-
-Unknown - 2.0.0,"January 14, 2020",-,-
-Unknown - 1.0.1,"March 09, 2020",-,-
-Unknown - 1.0.0,"August 24, 2019",-,-
-Unknown,"Traps, ESM and Cortex XDR agent",-,-
-Unknown,Version,-,-
-Unknown,8.9 (Cortex XDR agent),-,-
-Unknown,8.8 (Cortex XDR agent),-,-
-Unknown,8.7.100 CE (Cortex XDR agent),-,-
-Unknown,8.7 (Cortex XDR agent),-,-
-Unknown,8.6 (Cortex XDR agent),-,-
-Unknown,8.5 (Cortex XDR agent),-,-
-Unknown,8.4 (Cortex XDR agent),-,-
-Unknown,8.3 CE (Cortex XDR agent),-,-
-Unknown,8.3 (Cortex XDR agent),-,-
-Unknown,8.2 (Cortex XDR agent),-,-
-Unknown,8.1 (Cortex XDR agent),-,-
-Unknown,8.0 (Cortex XDR agent),-,-
-Unknown,7.9.103 CE (Cortex XDR agent),-,-
-Unknown,7.9 CE (Cortex XDR agent),-,-
-Unknown,7.9 (Cortex XDR agent),-,-
-Unknown,7.8 (Cortex XDR agent),-,-
-Unknown,7.7 (Cortex XDR agent),-,-
-Unknown,7.6 (Cortex XDR agent),-,-
-Unknown,7.5 CE (Cortex XDR Agent),-,-
-Unknown,7.5 (Cortex XDR agent),-,-
-Unknown,7.4 (Cortex XDR agent),-,-
-Unknown,7.3 (Cortex XDR agent),-,-
-Unknown,7.2 (Cortex XDR agent),-,-
-Unknown,7.1 (Cortex XDR agent),-,-
-Unknown,7.0 (Cortex XDR agent),-,-
-Unknown,6.1,-,-
-Unknown,6.0,-,-
-Unknown,5.0,-,-
-Unknown,4.2,-,-
-Unknown,4.1,-,-
-Unknown,4.0,-,-
-Unknown,3.4,-,-
-Unknown,3.3,-,-
-Unknown,3.2,-,-
-Unknown,3.1,-,-
-Unknown,,-,-
-Unknown,Cortex XSOAR,-,-
-Unknown,Version,-,-
-Unknown,8.8,-,-
-Unknown,8.7,-,-
-Unknown,8.6,-,-
-Unknown,8.5,-,-
-Unknown,6.14,-,-
-Unknown,6.13,-,-
-Unknown,6.12,-,-
-Unknown,6.11,-,-
-Unknown,6.10,-,-
-Unknown,6.9,-,-
-Unknown,6.8,-,-
-Unknown,6.6,-,-
-Unknown,6.5,-,-
-Unknown,6.2,-,-
-Unknown,6.1,-,-
-Unknown,6.0,-,-
-Unknown,5.5,-,-
-Unknown,,-,-
-Unknown,GlobalProtect™,-,-
-Unknown,GlobalProtect App version,-,-
-Unknown,6.3,-,-
-Unknown,6.2,-,-
-Unknown,6.1,-,-
-Unknown,6.0,-,-
-Unknown,5.3,-,-
-Unknown,5.2,-,-
-Unknown,5.1,-,-
-Unknown,5.0,-,-
-Unknown,4.1,-,-
-Unknown,4.0,-,-
-Unknown,3.1,-,-
-Unknown,3.0,-,-
-Unknown,Prisma Cloud Compute Edition,-,-
-Unknown,Version,-,-
-Unknown,22.12,-,-
-Unknown,22.06,-,-
-Unknown,22.01,-,-
-Unknown,21.08,-,-
-Unknown,21.04,-,-
-Unknown,20.12,-,-
-Unknown,20.09,-,-
-Unknown,20.04,-,-
-Unknown,19.11,-,-
 Unknown,-,-,-
 Unknown,-,-,-
 Unknown,-,-,-
@@ -216,24 +106,127 @@ Unknown,-,-,-
 Unknown,-,-,-
 Unknown,-,-,-
 Unknown,-,-,-
-Unknown,Prisma SD-WAN,-,-
-Unknown,Version,-,-
-Unknown,6.5,-,-
-Unknown,6.4,-,-
-Unknown,6.3,-,-
-Unknown,6.2,-,-
-Unknown,6.1,-,-
-Unknown,6.0,-,-
-Unknown,5.6,-,-
-Unknown,5.5,-,-
-Unknown,5.4,-,-
-Unknown,5.2,-,-
-Unknown,5.1,-,-
-Unknown,5.0,-,-
-Unknown,4.7,-,-
-Unknown,4.6,-,-
-Unknown,4.5,-,-
-Unknown,4.4,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
+Unknown,-,-,-
 Unknown,-,-,-
 Unknown,-,-,-
 Unknown,-,-,-
