@@ -1,0 +1,228 @@
+softwareName,version,releaseDate,eolDate
+prisma-access-browser,Prisma Access Browser,-,-
+prisma-access-browser,139.12.x.x,2025-08-13,2025-11-11
+prisma-access-browser,139.7.x.x,2025-08-07,2025-11-05
+prisma-access-browser,138.69.x.x,2025-07-30,2025-10-28
+prisma-access-browser,138.64.x.x,2025-07-23,2025-10-21
+prisma-access-browser,138.53.x.x,2025-07-16,2025-10-14
+prisma-access-browser,138.47.x.x,2025-07-09,2025-10-07
+prisma-access-browser,138.40.x.x,2025-07-01,2025-09-29
+prisma-access-browser,138.33.x.x,2025-06-25,2025-09-23
+prisma-access-browser,137.27.x.x,2025-06-18,2025-09-16
+prisma-access-browser,137.20.x.x,2025-06-11,2025-09-09
+prisma-access-browser,137.16.x.x,2025-06-03,2025-09-01
+prisma-access-browser,137.8.x.x,2025-05-28,2025-08-26
+prisma-access-browser,136.33.x.x,2025-05-21,2025-08-19
+prisma-access-browser,136.24.x.x,2025-05-14,2025-08-12
+prisma-access-browser,136.17.x.x,2025-05-07,2025-08-05
+prisma-access-browser,136.11.x.x,2025-04-30,2025-07-29
+prisma-access-browser,135.27.x.x,2025-04-23,2025-07-22
+prisma-access-browser,135.16.x.x,2025-04-09,2025-07-08
+prisma-access-browser,135.10.x.x,2025-04-02,2025-07-01
+prisma-access-browser,134.29.x.x,2025-03-26,2025-06-24
+prisma-access-browser,134.20.x.x,2025-03-20,2025-06-18
+prisma-access-browser,134.17.x.x,2025-03-11,2025-06-09
+prisma-access-browser,134.7.x.x,2025-03-05,2025-06-03
+prisma-access-browser,133.36.x.x,2025-02-26,2025-05-27
+prisma-access-browser,133.27.x.x,2025-02-19,2025-05-20
+prisma-access-browser,133.16.x.x,2025-02-13,2025-05-14
+prisma-access-browser,133.8.x.x,2025-02-05,2025-05-06
+prisma-access-browser,132.x.3025.x,2025-01-29,2025-04-29
+prisma-access-browser,132.x.3017.x,2025-01-22,2025-04-22
+prisma-access-browser,132.x.3010.x,2025-01-15,2025-04-15
+prisma-access-browser,131.x.2999.x,2025-01-08,2025-04-08
+prisma-access-browser,131.x.2995.x,2025-01-01,2025-04-01
+prisma-access-browser,131.x.2986.x,2024-12-26,2025-03-26
+prisma-access-browser,131.x.2976.x,2024-12-19,2025-03-19
+prisma-access-browser,131.x.2968.x,2024-12-11,2025-03-11
+prisma-access-browser,131.x.2963.x,2024-12-04,2025-03-04
+prisma-access-browser,131.x.2955.x,2024-11-28,2025-02-26
+prisma-access-browser,131.x.2948.x,2024-11-20,2025-02-18
+prisma-access-browser,131.x.2943.x,2024-11-14,2025-02-12
+prisma-access-browser,130.x.2936.x,2024-11-06,2025-02-04
+prisma-access-browser,130.x.2931.x,2024-10-30,2025-01-28
+prisma-access-browser,130.x2926.x,2024-10-23,2025-01-21
+prisma-access-browser,130.x2920.x,2024-10-16,2025-01-14
+prisma-access-browser,129.x2913.x,2024-10-09,2025-01-07
+prisma-access-browser,129.x2910.x,2024-10-02,2024-12-31
+prisma-access-browser,129.x2903.x,2024-09-25,2024-12-24
+prisma-access-browser,129.x2896.x,2024-09-18,2024-12-17
+prisma-access-browser,128.x.2888.x,2024-09-11,2024-12-10
+prisma-access-browser,128.x.2884.x,2024-09-03,2024-12-02
+prisma-access-browser,128.x.2877.x,2024-08-28,2024-11-27
+prisma-access-browser,128.x.2869.x,2024-08-21,2024-11-19
+prisma-access-browser,127.x.2863.x,2024-08-14,2024-11-12
+prisma-access-browser,127.x.2858.x,2024-08-07,2024-11-05
+prisma-access-browser,127.x.2853.x,2024-07-31,2024-10-29
+prisma-access-browser,127.x.2849.x,2024-07-24,2024-10-22
+prisma-access-browser,126.x.2844.x,2024-07-17,2024-10-15
+prisma-access-browser,126.x.2842.x,2024-07-10,2024-10-08
+prisma-access-browser,126.x.2834.x,2024-07-04,2024-10-02
+prisma-access-browser,126.x.2826.x,2024-06-25,2024-09-23
+prisma-access-browser,126.x.2819.x,2024-06-19,2024-09-17
+prisma-access-browser,126.x.2811.x,2024-06-12,2024-09-10
+prisma-access-browser,125.x.2804.x,2024-05-31,2024-08-29
+,IBM Security QRadar on Cloud,2026-04-14,-
+,IBM Security QRadar Suite – Cloud-Native SIEM,2026-04-14,-
+,IBM Security QRadar Suite – SOAR,2026-04-14,-
+,The SOAR Portion of the Cloud Pak for Security as a Service (excluding Guardium and Identity Access Management portions),2026-04-14,-
+,IBM Security SOAR on Cloud,2026-04-14,-
+,IBM Security Randori Recon,2026-04-14,-
+,IBM Security QRadar Suite – Log Insights,2026-04-14,-
+,IBM Security QRadar Suite – EDR,2026-08-31,-
+,IBM Security QRadar Suite - XDR,2026-08-31,-
+,IBM Security X-Force Threat Intelligence,2026-08-31,-
+,IBM Security Randori Attack,2026-08-31,-
+,IBM Security QRadar Advisor with Watson,2026-08-31,-
+pan-os-panorama,11.2,2024-05-02,2027-05-02
+pan-os-panorama,11.1,2023-11-03,2027-05-03
+pan-os-panorama,11.0,2022-11-17,2024-11-17
+pan-os-panorama,10.2+,2022-02-27,2025-08-27
+pan-os-panorama,10.1+,2021-05-31,2024-12-01
+pan-os-panorama,10.0+,2020-07-16,2022-07-16
+pan-os-panorama,9.1+,2019-12-13,2024-06-30
+pan-os-panorama,9.0-XFR (VM-Series only),2019-09-19,2020-09-19
+pan-os-panorama,9.0,2019-02-06,2022-03-01
+pan-os-panorama,8.1+,2018-03-01,2022-03-01
+pan-os-panorama,8.0,2017-01-29,2019-10-31
+pan-os-panorama,7.1,2016-03-29,2020-06-30
+pan-os-panorama,7.0,2015-06-04,2017-12-04
+pan-os-panorama,6.1,2014-10-25,2018-10-25
+pan-os-panorama,6.0,2014-01-19,2017-03-19
+pan-os-panorama,5.1 (Panorama only),2013-05-09,2017-05-09
+pan-os-panorama,5.0,2012-11-13,2016-11-13
+pan-os-panorama,4.1,2011-10-31,2015-04-30
+pan-os-panorama,4.0,2011-02-22,2014-12-31
+pan-os-panorama,3.1,2010-03-15,2013-06-30
+pan-os-panorama,3.0,2009-06-17,2010-12-17
+pan-os-panorama,2.1,2009-01-05,2012-01-05
+pan-os-panorama,2.0,2008-05-20,2009-05-20
+pan-os-panorama,1.3,2007-11-15,2008-11-20
+panorama-plugin,Panorama Plugins,-,-
+panorama-plugin,5.3.4,2025-02-20,Latest
+panorama-plugin,5.3.3,2025-02-14,2025-05-01
+panorama-plugin,5.3.2,2025-01-16,2025-05-01
+panorama-plugin,5.3.1,2024-11-22,Latest
+panorama-plugin,5.3.0,2024-10-10,2025-05-01
+panorama-plugin,5.2.2,2024-04-25,2025-05-01
+panorama-plugin,5.2.1,2024-03-28,2025-05-01
+panorama-plugin,5.2.0,2024-02-15,2025-05-01
+panorama-plugin,5.1.3,2024-10-10,Latest
+panorama-plugin,5.1.2,2024-09-24,2025-05-01
+panorama-plugin,5.1.1,2023-07-19,2024-08-01
+panorama-plugin,5.0.1,2023-05-24,2024-08-01
+panorama-plugin,5.0.0,2023-03-23,2024-08-01
+panorama-plugin,4.1.0,2023-01-24,2024-08-01
+panorama-plugin,4.0.0,2022-02-24,2024-08-01
+panorama-plugin,3.0.2,2022-01-24,2024-08-01
+panorama-plugin,3.0.1,2021-09-02,2024-08-01
+panorama-plugin,3.0.0,2021-08-06,2024-08-01
+panorama-plugin,2.0.2 (9.1),2020-08-06,2024-08-01
+panorama-plugin,2.0.1,2020-03-09,2024-08-01
+panorama-plugin,2.0.0,2020-01-14,2024-08-01
+panorama-plugin,1.0.1,2020-03-09,2024-08-01
+panorama-plugin,1.0.0,2019-08-24,2024-08-01
+traps-esm-and-cortex,"Traps, ESM and Cortex XDR agent",-,-
+traps-esm-and-cortex,8.9 (Cortex XDR agent),2025-07-21,2026-04-21
+traps-esm-and-cortex,8.8 (Cortex XDR agent),2025-04-28,2026-02-18
+traps-esm-and-cortex,8.7.100 CE (Cortex XDR agent),2025-07-02,2027-07-02
+traps-esm-and-cortex,8.7 (Cortex XDR agent),2025-02-02,2025-11-23
+traps-esm-and-cortex,8.6 (Cortex XDR agent),2024-09-30,2025-07-13
+traps-esm-and-cortex,8.5 (Cortex XDR agent),2024-06-30,2025-04-21
+traps-esm-and-cortex,8.4 (Cortex XDR agent),2024-04-14,2025-02-05
+traps-esm-and-cortex,8.3 CE (Cortex XDR agent),2024-05-21,2026-05-21
+traps-esm-and-cortex,8.3 (Cortex XDR agent),2024-02-11,2024-11-25
+traps-esm-and-cortex,8.2 (Cortex XDR agent),2023-10-29,2024-08-12
+traps-esm-and-cortex,8.1 (Cortex XDR agent),2023-06-25,2024-04-09
+traps-esm-and-cortex,8.0 (Cortex XDR agent),2023-03-05,2023-12-19
+traps-esm-and-cortex,7.9.103 CE (Cortex XDR agent),2024-11-11,"December 31, 2026**"
+traps-esm-and-cortex,7.9 CE (Cortex XDR agent),2023-03-19,2025-03-19
+traps-esm-and-cortex,7.9 (Cortex XDR agent),2022-12-04,2023-09-11
+traps-esm-and-cortex,7.8 (Cortex XDR agent),2022-07-24,2023-04-24
+traps-esm-and-cortex,7.7 (Cortex XDR agent),2022-03-27,2022-12-27
+traps-esm-and-cortex,7.6 (Cortex XDR agent),2021-12-05,2022-09-05
+traps-esm-and-cortex,7.5 CE (Cortex XDR Agent),2022-03-06,2024-03-06
+traps-esm-and-cortex,7.5 (Cortex XDR agent),2021-08-22,2022-08-22
+traps-esm-and-cortex,7.4 (Cortex XDR agent),2021-05-24,2022-05-24
+traps-esm-and-cortex,7.3 (Cortex XDR agent),2021-02-01,2022-02-01
+traps-esm-and-cortex,7.2 (Cortex XDR agent),2020-09-07,2022-03-07
+traps-esm-and-cortex,7.1 (Cortex XDR agent),2020-04-22,2021-06-04
+traps-esm-and-cortex,7.0 (Cortex XDR agent),2019-12-04,2021-06-04
+traps-esm-and-cortex,6.1,2019-07-02,2022-07-01
+traps-esm-and-cortex,6.0,2019-02-26,2020-02-26
+traps-esm-and-cortex,5.0,2018-03-19,2024-06-01
+traps-esm-and-cortex,4.2,2018-06-25,"March 1, 2022*"
+traps-esm-and-cortex,4.1,2017-09-15,2019-09-15
+traps-esm-and-cortex,4.0,2017-04-05,2018-04-05
+traps-esm-and-cortex,3.4,2016-08-21,2019-08-21
+traps-esm-and-cortex,3.3,2015-11-10,2017-02-28
+traps-esm-and-cortex,3.2,2015-03-31,2016-03-31
+traps-esm-and-cortex,3.1,"September 3rd, 2014",2015-09-03
+cortex-xsoar,Cortex XSOAR,-,-
+cortex-xsoar,8.8,2026-01-06,-
+cortex-xsoar,8.7,"Sept 17, 2025",-
+cortex-xsoar,8.6,2025-07-14,-
+cortex-xsoar,8.5,2025-04-01,-
+cortex-xsoar,6.14,2026-06-30,-
+cortex-xsoar,6.13,2026-06-30,-
+cortex-xsoar,6.11,2024-05-31,-
+cortex-xsoar,6.10,2024-01-31,-
+cortex-xsoar,6.9,2023-11-01,-
+cortex-xsoar,6.8,2023-07-01,-
+cortex-xsoar,6.6,2023-05-01,-
+cortex-xsoar,6.5,2023-02-01,-
+cortex-xsoar,6.2,2022-05-01,-
+cortex-xsoar,6.1,2022-02-08,-
+cortex-xsoar,6.0,2021-06-08,-
+cortex-xsoar,5.5,2021-10-01,-
+globalprotect,GlobalProtect™,-,-
+globalprotect,6.3,2024-06-13,2026-06-13
+globalprotect,6.2,2023-05-23,2026-12-31
+globalprotect,6.1,2022-09-01,2025-03-01
+globalprotect,6.0,2022-02-22,2025-12-31
+globalprotect,5.3,2021-06-01,2022-12-01
+globalprotect,5.2,2020-07-30,2023-08-31
+globalprotect,5.1,2019-12-12,2021-03-12
+globalprotect,5.0,2019-02-12,2020-05-12
+globalprotect,4.1,2018-03-01,2019-06-01
+globalprotect,4.0,2017-01-30,2018-05-02
+globalprotect,3.1,2016-06-23,2017-09-23
+globalprotect,3.0,2016-02-16,2017-05-18
+prisma-cloud-compute,Prisma Cloud Compute Edition,-,-
+prisma-cloud-compute,22.12,2022-12-04,2023-12-03
+prisma-cloud-compute,22.06,2022-06-09,2023-08-20
+prisma-cloud-compute,22.01,2022-01-10,2023-04-23
+prisma-cloud-compute,21.08,2021-09-08,2022-12-04
+prisma-cloud-compute,21.04,2021-04-26,2022-06-09
+prisma-cloud-compute,20.12,2020-12-21,2021-09-08
+prisma-cloud-compute,20.09,2020-09-22,2021-04-26
+prisma-cloud-compute,20.04,2020-04-07,2020-12-21
+prisma-cloud-compute,19.11,2019-11-20,2020-09-22
+LightCyber Magna Virtual Appliances,"LightCyber Magna Detector Virtual Appliance
+(D-150V)",2017-12-31,2020-12-31
+LightCyber Magna Virtual Appliances,"LightCyber Magna Probe Virtual Appliance
+(P-50TV)",2017-12-31,2020-12-31
+LightCyber Magna Virtual Appliances,LightCyber Magna Master Virtual Appliance (M-100V),2017-12-31,2020-12-31
+evident-io,Evident.io™,-,-
+evident-io,Evident.io,2018-03-26,2020-07-31
+Prisma SD-WAN,6.5,2025-02-15,2028-02-15
+Prisma SD-WAN,6.4,2024-08-09,2026-08-31
+Prisma SD-WAN,6.3,2024-02-22,2027-02-28
+Prisma SD-WAN,6.2,2023-05-04,2025-05-04
+Prisma SD-WAN,6.1,2022-12-23,2026-06-30
+Prisma SD-WAN,6.0,2022-11-05,2023-09-01
+Prisma SD-WAN,5.6,2021-10-05,2026-06-30
+Prisma SD-WAN,5.5,2021-04-11,2023-08-30
+Prisma SD-WAN,5.4,2020-08-10,2023-03-31
+Prisma SD-WAN,5.2,2020-02-05,2022-01-31
+Prisma SD-WAN,5.1,2019-01-31,2022-01-31
+Prisma SD-WAN,5.0,2018-08-03,2022-01-31
+Prisma SD-WAN,4.7,2018-05-23,2020-03-15
+Prisma SD-WAN,4.6,2018-04-04,2020-02-15
+Prisma SD-WAN,4.5,2017-09-15,2020-02-15
+Prisma SD-WAN,4.4,2017-04-28,2020-02-15
+brightcloud-subscription,BRIGHTCLOUD Subscription,-,-
+brightcloud-subscription,BrightCloud,2009-01-05,2021-07-31
+vm-series-models,VM-Series Models,-,-
+vm-series-models,"VM-Series Models
+(VM-50, VM-100, VM-200, VM-300, VM-500, VM-700, VM-1000-HV)",2021-07-31,2024-07-31
