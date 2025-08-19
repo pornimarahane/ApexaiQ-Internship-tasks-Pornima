@@ -91,16 +91,6 @@ class PaloAltoScraper:
             self._normalize_date(eol_date),
         )
 
-    def _get_heading(self, table):
-        """
-        Try to get the heading text just above the table.
-        """
-        try:
-            heading_elem = table.find_element(By.XPATH, "preceding-sibling::*[1]")
-            return heading_elem.text.strip()
-        except:
-            return "Unknown"
-
     def scrape(self):
         self.driver.get(self.url)
         time.sleep(3)
@@ -112,7 +102,15 @@ class PaloAltoScraper:
                 print(f"[!] Table not found for xpath: {xp}")
                 continue
 
-            software_name = self._get_heading(table)
+            # ---------------- Get Software Name for this section ----------------
+            try:
+                software_name_elem = self.driver.find_element(By.XPATH, xp + "/preceding-sibling::h2[1]")
+                software_name = software_name_elem.text.strip()
+            except:
+                # Fallback to xpath id if heading not found
+                software_name = xp.split('"')[1]
+            # -------------------------------------------------------------------
+
             rows = table.find_elements(By.XPATH, ".//tr")
             if not rows:
                 continue
@@ -140,7 +138,7 @@ class PaloAltoScraper:
                 )
                 self.data.append(product.as_dict())
 
-    def save_to_csv(self, filename="paloalto_software.csv"):
+    def save_to_csv(self, filename="paloalto_software1.csv"):
         df = pd.DataFrame(self.data)
         df.to_csv(filename, index=False)
         print(f"[+] Saved {len(df)} records to {filename}")
