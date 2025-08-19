@@ -1,4 +1,3 @@
-import re
 import time
 import pandas as pd
 from selenium import webdriver
@@ -59,7 +58,7 @@ class PaloAltoScraper:
                 return datetime.strptime(text, fmt).strftime("%Y-%m-%d")
             except:
                 continue
-        return "-"
+        return text  # keep original if not parseable
 
     def scrape(self):
         self.driver.get(self.url)
@@ -76,58 +75,44 @@ class PaloAltoScraper:
             heading = "Unknown"
             for tag in ["h2", "h3", "b", "strong", "p"]:
                 try:
-                    heading = table.find_element(By.XPATH, f"./preceding-sibling::{tag}[1]").text.strip()
-                    if heading:
+                    h = table.find_element(By.XPATH, f"./preceding-sibling::{tag}[1]").text.strip()
+                    if h:
+                        heading = h
                         break
                 except:
                     continue
 
-            rows = table.find_elements(By.XPATH, ".//tr[td]")  # only rows with <td>
-
+            rows = table.find_elements(By.XPATH, ".//tr")
             if not rows:
                 continue
 
-            header_cells = rows[0].find_elements(By.TAG_NAME, "td")
-            header_texts = [c.text.strip().lower() for c in header_cells]
-
-            # Column mapping
-            version_idx = next((j for j, h in enumerate(header_texts) if "version" in h), None)
-            eol_idx = next((j for j, h in enumerate(header_texts) if "end" in h or "eol" in h or "standard support" in h), None)
-            release_idx = next((j for j, h in enumerate(header_texts) if "release" in h), None)
-
-            for row in rows[1:]:
+            for row in rows:
                 cells = row.find_elements(By.TAG_NAME, "td")
                 if not cells:
                     continue
 
-                # skip duplicate header rows inside table
-                if cells[0].text.strip().lower() in ["version", "software", "product"]:
+                texts = [c.text.strip() for c in cells]
+
+                # skip header-like rows
+                if any(x.lower() in ["version", "release", "end of life", "eol", "standard support"] for x in texts):
                     continue
 
+                # defaults
                 product_name = heading
-                version = "-"
-                release_date = "-"
-                eol_date = "-"
+                version, release_date, eol_date = "-", "-", "-"
 
-                # --- Table specific fixes ---
-                if i == 1:  # Prisma Access Browser
-                    product_name = "Prisma Access Browser"
-                    version = cells[0].text.strip() if len(cells) > 0 else "-"
-                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
-                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                # handle based on column count
+                if len(texts) == 2:
+                    version, eol_date = texts
+                elif len(texts) == 3:
+                    version, release_date, eol_date = texts
+                elif len(texts) >= 4:
+                    product_name, version, release_date, eol_date = texts[:4]
 
-                elif i == 2:  # QRadar SaaS Products
-                    product_name = f"{heading} ({cells[0].text.strip()})" if len(cells) > 0 else heading
-                    version = "-"
-                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
-                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
+                # QRadar special rule (append heading)
+                if i == 2:
+                    product_name = f"{heading} ({texts[0]})"
 
-                else:  # General tables
-                    version = cells[version_idx].text.strip() if version_idx is not None and len(cells) > version_idx else "-"
-                    release_date = cells[release_idx].text.strip() if release_idx is not None and len(cells) > release_idx else "-"
-                    eol_date = cells[eol_idx].text.strip() if eol_idx is not None and len(cells) > eol_idx else "-"
-
-                # Normalize dates
                 release_date = self._normalize_date(release_date)
                 eol_date = self._normalize_date(eol_date)
 
